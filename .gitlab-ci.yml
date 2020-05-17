@@ -27,7 +27,7 @@ Build Consul:
   variables:
     TARGET_ARTIFACT: consul
 
-Build Consul:
+Build Vault:
   <<: *build-image
   variables:
     TARGET_ARTIFACT: vault
