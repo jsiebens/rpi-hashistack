@@ -1,0 +1,28 @@
+stages:
+  - build
+
+.build-image: &build-image
+  stage: build
+  image: registry.gitlab.com/nosceon/rpi-images/build-tools:gitlab
+  script:
+    - gcloud auth activate-service-account --key-file=${GOOGLE_CREDENTIALS}
+    - /usr/sbin/update-binfmts --enable qemu-arm >/dev/null 2>&1
+    - /bin/packer build packer/${TARGET_ARTIFACT}.json
+    - mv output-arm-image/image output-arm-image/${TARGET_ARTIFACT}.iso
+    - mkdir dist && tar -czvf dist/${TARGET_ARTIFACT}.tgz -C output-arm-image ${TARGET_ARTIFACT}.iso
+    - |
+      if [ -z ${CI_COMMIT_TAG+x} ]; then
+        gsutil cp dist/${TARGET_ARTIFACT}.tgz gs://${GCS_BUCKET}/${CI_PROJECT_NAME}/${TARGET_ARTIFACT}-${CI_COMMIT_SHORT_SHA}.tgz
+      else
+        gsutil cp dist/${TARGET_ARTIFACT}.tgz gs://${GCS_RELEASE_BUCKET}/${CI_PROJECT_NAME}/${CI_COMMIT_TAG}/${TARGET_ARTIFACT}-${CI_COMMIT_TAG}.tgz
+      fi
+  tags:
+    - packer-arm
+  only:
+    - master
+    - /^v[0-9][0-9]*.[0-9][0-9]*.[0-9][0-9]?$/
+
+Build Consul:
+  <<: *build-image
+  variables:
+    TARGET_ARTIFACT: consul

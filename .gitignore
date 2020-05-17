@@ -1,0 +1,4 @@
+.vagrant
+output-arm-image
+packer_cache
+*.log
