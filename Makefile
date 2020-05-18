@@ -25,3 +25,7 @@ vault:
 .PHONY: nomad
 nomad:
 	$(call build_image,nomad)
+
+.PHONY: nomad-client
+nomad-client:
+	$(call build_image,nomad-client)

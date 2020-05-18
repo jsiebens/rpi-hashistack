@@ -36,4 +36,8 @@ Build Nomad:
   <<: *build-image
   variables:
     TARGET_ARTIFACT: nomad
-    
+
+Build Nomad Client:
+  <<: *build-image
+  variables:
+    TARGET_ARTIFACT: nomad-client
