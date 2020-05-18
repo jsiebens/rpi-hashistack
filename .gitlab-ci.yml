@@ -31,3 +31,9 @@ Build Vault:
   <<: *build-image
   variables:
     TARGET_ARTIFACT: vault
+
+Build Nomad:
+  <<: *build-image
+  variables:
+    TARGET_ARTIFACT: nomad
+    

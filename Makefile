@@ -12,7 +12,7 @@ define build_image
 endef
 
 .PHONY: all
-all: consul vault
+all: consul vault nomad
 
 .PHONY: consul
 consul:
@@ -21,3 +21,7 @@ consul:
 .PHONY: vault
 vault:
 	$(call build_image,vault)
+
+.PHONY: nomad
+nomad:
+	$(call build_image,nomad)
