@@ -27,7 +27,8 @@
         "scripts/install-consul.sh",
         "scripts/install-nomad.sh",
         "scripts/install-docker.sh",
-        "scripts/install-jdk.sh"
+        "scripts/install-jdk.sh",
+        "scripts/install-dnsmasq.sh"
       ]
     }
   ]
