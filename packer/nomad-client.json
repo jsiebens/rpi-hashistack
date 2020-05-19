@@ -1,10 +1,17 @@
 {
+  "variables": {
+    "consul_version": "",
+    "nomad_version": "",
+    "iso_url": "",
+    "iso_checksum": "",
+    "iso_checksum_type": ""
+  },
   "builders": [
     {
       "type": "arm-image",
-      "iso_url": "https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-07/2020-02-05-raspbian-buster-lite.zip",
-      "iso_checksum_type": "sha256",
-      "iso_checksum": "7ed5a6c1b00a2a2ab5716ffa51354547bb1b5a6d5bcb8c996b239f9ecd25292b",
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
       "last_partition_extra_size": 768000000
     }
   ],
@@ -19,8 +26,8 @@
     {
       "type": "shell",
       "environment_vars": [
-        "CONSUL_VERSION=1.7.3",
-        "NOMAD_VERSION=0.11.2"
+        "CONSUL_VERSION={{user `consul_version`}}",
+        "NOMAD_VERSION={{user `nomad_version`}}"
       ],
       "scripts": [
         "scripts/install-cloud-init.sh",
