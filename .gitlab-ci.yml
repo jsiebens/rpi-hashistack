@@ -41,3 +41,13 @@ Build Nomad Client:
   <<: *build-image
   variables:
     TARGET_ARTIFACT: nomad-client
+
+Build Hashi Stack:
+  <<: *build-image
+  variables:
+    TARGET_ARTIFACT: hashi-stack
+
+Build Hashi Stack Ext:
+  <<: *build-image
+  variables:
+    TARGET_ARTIFACT: hashi-stack-ext

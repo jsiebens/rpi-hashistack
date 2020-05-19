@@ -29,3 +29,11 @@ nomad:
 .PHONY: nomad-client
 nomad-client:
 	$(call build_image,nomad-client)
+
+.PHONY: hashi-stack
+hashi-stack:
+	$(call build_image,hashi-stack)
+
+.PHONY: hashi-stack-ext
+hashi-stack-ext:
+	$(call build_image,hashi-stack-ext)
