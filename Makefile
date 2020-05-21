@@ -9,6 +9,7 @@ define build_image
 		registry.gitlab.com/nosceon/rpi-images/build-tools:build -var-file=/build/packer/variables.json "/build/packer/$1.json"
 	mkdir -p ${PWD}/dist
 	mv ${PWD}/output-arm-image/image ${PWD}/dist/rpi-$1.iso
+	rm -rf ${PWD}/output-arm-image
 endef
 
 .PHONY: all
