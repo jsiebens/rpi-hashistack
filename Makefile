@@ -7,8 +7,8 @@ define build_image
 		-v ${PWD}/packer_cache:/build/packer_cache \
 		-v ${PWD}/output-arm-image:/build/output-arm-image \
 		registry.gitlab.com/nosceon/rpi-images/build-tools:build -var-file=/build/packer/variables.json "/build/packer/$1.json"
-
-	mv ${PWD}/output-arm-image/image ${PWD}/output-arm-image/$1.iso
+	mkdir -p ${PWD}/dist
+	mv ${PWD}/output-arm-image/image ${PWD}/dist/rpi-$1.iso
 endef
 
 .PHONY: all
