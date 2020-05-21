@@ -1,5 +1,5 @@
 define build_image
-	rm ${PWD}/output-arm-image/$1.iso || true
+	rm ${PWD}/dist/rpi-$1.iso || true
 	docker run \
 		--rm \
 		--privileged \
@@ -13,7 +13,7 @@ define build_image
 endef
 
 .PHONY: all
-all: consul vault nomad
+all: consul vault nomad nomad-client hashi-stack hashi-stack-ext
 
 .PHONY: consul
 consul:
