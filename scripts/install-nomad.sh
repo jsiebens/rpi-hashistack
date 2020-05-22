@@ -9,6 +9,10 @@ curl -Os https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VER
 curl -Os https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_SHA256SUMS
 curl -Os https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_SHA256SUMS.sig
 
+# Verify the signature file is untampered.
+gpg --verify nomad_${NOMAD_VERSION}_SHA256SUMS.sig nomad_${NOMAD_VERSION}_SHA256SUMS
+
+# Verify the SHASUM matches the archive.
 shasum -a 256 -c nomad_${NOMAD_VERSION}_SHA256SUMS --ignore-missing
 
 echo "Installing Nomad..."

@@ -21,7 +21,8 @@
       "type": "shell",
       "inline": [
         "touch /boot/ssh",
-        "apt-get update"
+        "apt-get update",
+        "curl https://keybase.io/hashicorp/pgp_keys.asc | gpg --import"
       ]
     },
     {
@@ -36,6 +37,12 @@
         "scripts/install-consul.sh",
         "scripts/install-nomad.sh",
         "scripts/install-vault.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "gpgconf --kill gpg-agent"
       ]
     }
   ]

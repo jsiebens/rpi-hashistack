@@ -21,7 +21,8 @@
       "type": "shell",
       "inline": [
         "touch /boot/ssh",
-        "apt-get update"
+        "apt-get update",
+        "curl https://keybase.io/hashicorp/pgp_keys.asc | gpg --import"
       ]
     },
     {
@@ -39,6 +40,12 @@
         "scripts/install-docker.sh",
         "scripts/install-jdk.sh",
         "scripts/install-dnsmasq.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "gpgconf --kill gpg-agent"
       ]
     }
   ]
