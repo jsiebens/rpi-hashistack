@@ -1,5 +1,6 @@
 define build_image
 	rm ${PWD}/dist/rpi-$1.iso || true
+	rm -rf ${PWD}/output-arm-image
 	docker run \
 		--rm \
 		--privileged \
@@ -9,7 +10,6 @@ define build_image
 		registry.gitlab.com/nosceon/rpi-images/build-tools:build -var-file=/build/packer/variables.json "/build/packer/$1.json"
 	mkdir -p ${PWD}/dist
 	mv ${PWD}/output-arm-image/image ${PWD}/dist/rpi-$1.iso
-	rm -rf ${PWD}/output-arm-image
 endef
 
 .PHONY: all

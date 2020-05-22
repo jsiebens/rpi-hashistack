@@ -2,11 +2,17 @@
 set -e
 
 echo "Fetching Vault... ${VAULT_VERSION}"
-cd /tmp
-curl -L -o vault.zip "https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_arm.zip"
+mkdir -p /tmp/vault
+cd /tmp/vault
+
+curl -Os https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_arm.zip
+curl -Os https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_SHA256SUMS
+curl -Os https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_SHA256SUMS.sig
+
+shasum -a 256 -c vault_${VAULT_VERSION}_SHA256SUMS --ignore-missing
 
 echo "Installing Vault..."
-unzip vault.zip >/dev/null
+unzip vault_${VAULT_VERSION}_linux_arm.zip >/dev/null
 mv vault /usr/local/bin/
 setcap cap_ipc_lock=+ep /usr/local/bin/vault
 
@@ -73,5 +79,8 @@ EOF
 chmod 0600 /etc/systemd/system/vault.service
 
 systemctl enable vault.service
+
+cd
+rm -rf /tmp/vault
 
 echo "Vault installation finished."

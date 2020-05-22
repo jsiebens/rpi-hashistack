@@ -2,11 +2,17 @@
 set -e
 
 echo "Fetching Nomad... ${NOMAD_VERSION}"
-cd /tmp
-curl -L -o nomad.zip "https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_arm.zip"
+mkdir /tmp/nomad
+cd /tmp/nomad
+
+curl -Os https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_arm.zip
+curl -Os https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_SHA256SUMS
+curl -Os https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_SHA256SUMS.sig
+
+shasum -a 256 -c nomad_${NOMAD_VERSION}_SHA256SUMS --ignore-missing
 
 echo "Installing Nomad..."
-unzip nomad.zip >/dev/null
+unzip nomad_${NOMAD_VERSION}_linux_arm.zip >/dev/null
 mv nomad /usr/local/bin/
 
 mkdir --parents /opt/nomad
@@ -52,5 +58,8 @@ EOF
 chmod 0600 /etc/systemd/system/nomad.service
 
 systemctl enable nomad.service
+
+cd
+rm -rf /tmp/nomad
 
 echo "Nomad installation finished."

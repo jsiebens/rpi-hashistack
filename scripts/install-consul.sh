@@ -2,11 +2,17 @@
 set -e
 
 echo "Fetching Consul... ${CONSUL_VERSION}"
-cd /tmp
-curl -L -o consul.zip "https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_armhfv6.zip"
+mkdir -p /tmp/consul
+cd /tmp/consul
+
+curl -Os https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_armhfv6.zip
+curl -Os https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_SHA256SUMS
+curl -Os https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_SHA256SUMS.sig
+
+shasum -a 256 -c consul_${CONSUL_VERSION}_SHA256SUMS --ignore-missing
 
 echo "Installing Consul..."
-unzip consul.zip >/dev/null
+unzip consul_${CONSUL_VERSION}_linux_armhfv6.zip >/dev/null
 mv consul /usr/local/bin/
 
 useradd --system --home /etc/consul.d --shell /bin/false consul
@@ -54,5 +60,8 @@ EOF
 chmod 0600 /etc/systemd/system/consul.service
 
 systemctl enable consul.service
+
+cd
+rm -rf /tmp/consul
 
 echo "Consul installation finished."
