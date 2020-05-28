@@ -49,5 +49,3 @@ When connected with the Vagrant box, run `make` in the `/vagrant` directory:
 cd /vagrant
 make
 ```
-
-<a href="https://asciinema.org/a/Cs6xArNOR1V66mNvcLTbhWVmh"><img src="https://asciinema.org/a/Cs6xArNOR1V66mNvcLTbhWVmh.svg" width="600"/></a>
