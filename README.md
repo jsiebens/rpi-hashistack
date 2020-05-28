@@ -1,13 +1,15 @@
-# RPI HashiCorp Stack
+# HashiStack on a Raspberry Pi
 
 
 This repository contains Packer templates and scripts to build Raspbian images with different HashiCorp tools like Consul, Nomad or Vault pre-installed.
 
-[Consul](https://www.consul.io/) is a distributed, highly-available tool that you can use for service discovery and key/value storage. A Consul cluster typically includes a small number of server nodes, and a larger number of client nodes, which you typically run alongside your apps.
+>[Consul](https://www.consul.io/) is a distributed, highly-available tool that you can use for service discovery and key/value storage. A Consul cluster typically includes a small number of server nodes, and a larger number of client nodes, which you typically run alongside your apps.
 
-[Nomad](https://www.nomadproject.io/) is a distributed, highly-available data-center aware scheduler. A Nomad cluster typically includes a small number of server nodes, and a larger number of client nodes, which are used for running jobs.
+>[Nomad](https://www.nomadproject.io/) is a distributed, highly-available data-center aware scheduler. A Nomad cluster typically includes a small number of server nodes, and a larger number of client nodes, which are used for running jobs.
 
-[Vault](https://www.vaultproject.io/) is an open source tool for managing secrets and protecting sensitive data.
+>[Vault](https://www.vaultproject.io/) is an open source tool for managing secrets and protecting sensitive data.
+
+Beside the HashiCorp tools, also [cloud-init](https://cloudinit.readthedocs.io/en/18.3/) is available to initialize and configure a Raspian instance. With cloud-init you can customize e.g. hostname, authorized ssh keys, a static ip, Consul or Nomad configuration, ... 
 
 This setup includes the following images:
 
