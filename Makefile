@@ -7,7 +7,7 @@ define build_image
 		-v ${PWD}:/build:ro \
 		-v ${PWD}/packer_cache:/build/packer_cache \
 		-v ${PWD}/output-arm-image:/build/output-arm-image \
-		registry.gitlab.com/nosceon/rpi-images/build-tools:build -var-file=/build/packer/variables.json "/build/packer/$1.json"
+		quay.io/solo-io/packer-builder-arm-image:v0.1.4.5 build -var-file=/build/packer/variables.json "/build/packer/$1.json"
 	mkdir -p ${PWD}/dist
 	mv ${PWD}/output-arm-image/image ${PWD}/dist/$1.img
 	rm -rf ${PWD}/output-arm-image
