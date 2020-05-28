@@ -1,5 +1,6 @@
 # HashiStack on a Raspberry Pi
 
+[![Build Status](https://travis-ci.org/jsiebens/rpi-hashistack.svg?branch=master)](https://travis-ci.org/jsiebens/rpi-hashistack)
 
 This repository contains Packer templates and scripts to build Raspbian images with different HashiCorp tools like Consul, Nomad or Vault pre-installed.
 
