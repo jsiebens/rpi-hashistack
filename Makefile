@@ -1,5 +1,5 @@
 define build_image
-	rm ${PWD}/dist/rpi-$1.iso || true
+	rm ${PWD}/dist/$1.img || true
 	rm -rf ${PWD}/output-arm-image
 	docker run \
 		--rm \
@@ -9,33 +9,26 @@ define build_image
 		-v ${PWD}/output-arm-image:/build/output-arm-image \
 		registry.gitlab.com/nosceon/rpi-images/build-tools:build -var-file=/build/packer/variables.json "/build/packer/$1.json"
 	mkdir -p ${PWD}/dist
-	mv ${PWD}/output-arm-image/image ${PWD}/dist/rpi-$1.iso
+	mv ${PWD}/output-arm-image/image ${PWD}/dist/$1.img
 	rm -rf ${PWD}/output-arm-image
 endef
 
-.PHONY: all
-all: consul vault nomad nomad-client hashi-stack hashi-stack-ext
+.PHONY = %
 
-.PHONY: consul
-consul:
-	$(call build_image,consul)
+SRCS := $(wildcard packer/rpi-*.json)
+IMAGES := $(SRCS:packer/rpi-%.json=rpi-%.img)
+ARCHIVES := $(SRCS:packer/rpi-%.json=rpi-%.tgz)
 
-.PHONY: vault
-vault:
-	$(call build_image,vault)
+all: ${IMAGES}
 
-.PHONY: nomad
-nomad:
-	$(call build_image,nomad)
+dist: ${ARCHIVES}
 
-.PHONY: nomad-client
-nomad-client:
-	$(call build_image,nomad-client)
+clean:
+	rm -rf dist
 
-.PHONY: hashi-stack
-hashi-stack:
-	$(call build_image,hashi-stack)
+%.img:
+	$(call build_image,$*)
 
-.PHONY: hashi-stack-ext
-hashi-stack-ext:
-	$(call build_image,hashi-stack-ext)
+%.tgz: %.img
+	rm -rf dist/$@
+	tar -czvf dist/$@ -C dist $<

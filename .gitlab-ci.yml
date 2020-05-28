@@ -8,8 +8,8 @@ stages:
     - gcloud auth activate-service-account --key-file=${GOOGLE_CREDENTIALS}
     - /usr/sbin/update-binfmts --enable qemu-arm >/dev/null 2>&1
     - /bin/packer build -var-file=packer/variables.json packer/${TARGET_ARTIFACT}.json
-    - mv output-arm-image/image output-arm-image/rpi-${TARGET_ARTIFACT}.iso
-    - mkdir dist && tar -czvf dist/rpi-${TARGET_ARTIFACT}.tgz -C output-arm-image rpi-${TARGET_ARTIFACT}.iso
+    - mv output-arm-image/image output-arm-image/rpi-${TARGET_ARTIFACT}.img
+    - mkdir dist && tar -czvf dist/rpi-${TARGET_ARTIFACT}.tgz -C output-arm-image rpi-${TARGET_ARTIFACT}.img
     - |
       if [ -z ${CI_COMMIT_TAG+x} ]; then
         gsutil cp dist/rpi-${TARGET_ARTIFACT}.tgz gs://${GCS_BUCKET}/${CI_PROJECT_NAME}/${CI_COMMIT_SHORT_SHA}/rpi-${TARGET_ARTIFACT}-${CI_COMMIT_SHORT_SHA}.tgz

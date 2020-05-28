@@ -11,12 +11,17 @@ This repository contains Packer templates and scripts to build Raspbian images w
 
 This setup includes the following images:
 
-- __rpi-consul.iso__: a Raspbian image with Consul installed as a systemd service
-- __rpi-vault.iso__: a Raspbian image with Consul and Vault installed as systemd services
-- __rpi-nomad.iso__: a Raspian image with Consul and Nomad installed as a systemd service
-- __rpi-nomad-client.iso__: same as previous image, but with extra software like Docker and a JDK
-- __rpi-hashi-stack.iso__: a Raspbian image with Consul, Vault and Nomad installed as systemd services
-- __rpi-hashi-stack-ext.iso__: same as previous image, but with extra software like Docker and a JDK
+- __rpi-consul.img__: a Raspbian image with Consul installed as a systemd service
+
+- __rpi-vault.img__: a Raspbian image with Consul and Vault installed as systemd services
+
+- __rpi-nomad.img__: a Raspian image with Consul and Nomad installed as a systemd service
+
+- __rpi-nomad-client.img__: same as previous image, but with extra software like Docker and a JDK
+
+- __rpi-hashi-stack.img__: a Raspbian image with Consul, Vault and Nomad installed as systemd services
+
+- __rpi-hashi-stack-ext.img__: same as previous image, but with extra software like Docker and a JDK
 
 ## Building the images
 
