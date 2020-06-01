@@ -10,6 +10,7 @@
   "builders": [
     {
       "type": "arm-image",
+      "image_type": "raspberrypi",
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
@@ -20,8 +21,6 @@
     {
       "type": "shell",
       "inline": [
-        "touch /boot/ssh",
-        "apt-get update",
         "curl https://keybase.io/hashicorp/pgp_keys.asc | gpg --import"
       ]
     },
@@ -33,7 +32,6 @@
         "VAULT_VERSION={{user `vault_version`}}"
       ],
       "scripts": [
-        "scripts/install-cloud-init.sh",
         "scripts/install-consul.sh",
         "scripts/install-nomad.sh",
         "scripts/install-vault.sh"
