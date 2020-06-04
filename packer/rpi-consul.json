@@ -1,5 +1,6 @@
 {
   "variables": {
+    "preferred_mirror": "{{env `PREFERRED_MIRROR`}}",
     "consul_version": "",
     "iso_url": "",
     "iso_checksum": "",
@@ -17,23 +18,14 @@
   "provisioners": [
     {
       "type": "shell",
-      "inline": [
-        "curl https://keybase.io/hashicorp/pgp_keys.asc | gpg --import"
-      ]
-    },
-    {
-      "type": "shell",
       "environment_vars": [
+        "PREFERRED_MIRROR={{user `preferred_mirror`}}",
         "CONSUL_VERSION={{user `consul_version`}}"
       ],
       "scripts": [
-        "scripts/install-consul.sh"
-      ]
-    },
-    {
-      "type": "shell",
-      "inline": [
-        "gpgconf --kill gpg-agent"
+        "scripts/before-installation.sh",
+        "scripts/install-consul.sh",
+        "scripts/after-installation.sh"
       ]
     }
   ]
