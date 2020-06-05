@@ -26,6 +26,14 @@ This setup includes the following images:
 
 - __rpi-hashi-stack-ext.img__: same as previous image, but with extra software like Docker and a JDK
 
+## How to use these images
+
+With the included images, all building blocks to deploy many different architecture are available:
+
+- [Nomad cluster co-located with a Consul cluster](./examples/nomad-consul-colocated-cluster)
+
+- [Nomad cluster with a separate Consul cluster](./examples/nomad-consul/separate-cluster)
+
 ## Building the images
 
 This project includes a Vagrant file and some scripts to build the images in an isolated environment.

@@ -1,0 +1,34 @@
+#cloud-config
+# vim: syntax=yaml
+#
+
+hostname: nomad-clt
+
+manage_etc_hosts: true
+package_update: false
+package_upgrade: false
+
+write_files:
+  - path: /etc/consul.d/consul.hcl
+    owner: consul:consul
+    content: |
+      advertise_addr = "{{ GetPrivateInterfaces | include \"type\" \"IP\" | attr \"address\" }}"
+      client_addr = "0.0.0.0"
+      data_dir = "/opt/consul"
+      retry_join = [ "consul-svr-1.local", "consul-svr-2.local", "consul-svr-3.local" ]
+      server = false
+      ui = false
+  - path: /etc/nomad.d/nomad.hcl
+    content: |
+      bind_addr = "0.0.0.0"
+      data_dir  = "/opt/nomad"
+      
+      client {
+        enabled = true
+        options {
+          "driver.raw_exec.enable" = "1"
+        }
+      }
+
+runcmd:
+- [ raspi-config, nonint, do_ssh, '0' ]

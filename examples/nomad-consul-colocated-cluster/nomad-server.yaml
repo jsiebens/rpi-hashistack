@@ -1,0 +1,30 @@
+#cloud-config
+# vim: syntax=yaml
+#
+
+hostname: nomad-svr
+
+manage_etc_hosts: true
+package_update: false
+package_upgrade: false
+
+write_files:
+- path: /etc/consul.d/consul.hcl
+  owner: consul:consul
+  content: |
+    advertise_addr = "{{ GetPrivateInterfaces | include \"type\" \"IP\" | attr \"address\" }}"
+    client_addr = "0.0.0.0"
+    data_dir = "/opt/consul"
+    bootstrap_expect = 3
+    retry_join = [ "nomad-svr-1.local", "nomad-svr-2.local", "nomad-svr-3.local" ]
+    server = true
+    ui = true
+- path: /etc/nomad.d/nomad.hcl
+  content: |
+    bind_addr = "0.0.0.0"
+    data_dir  = "/opt/nomad"
+    
+    server {
+        enabled          = true
+        bootstrap_expect = 3
+    }
