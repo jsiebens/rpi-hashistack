@@ -32,7 +32,7 @@ With the included images, all building blocks to deploy many different architect
 
 - [Nomad cluster co-located with a Consul cluster](./examples/nomad-consul-colocated-cluster)
 
-- [Nomad cluster with a separate Consul cluster](./examples/nomad-consul/separate-cluster)
+- [Nomad cluster with a separate Consul cluster](./examples/nomad-consul-separate-cluster)
 
 ## Building the images
 
