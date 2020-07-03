@@ -3,7 +3,7 @@ set -e
 
 echo "Fetching Vault... ${VAULT_VERSION}"
 mkdir -p /tmp/vault
-cd /tmp/vault
+pushd /tmp/vault
 
 curl -Os https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_arm.zip
 curl -Os https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_SHA256SUMS
@@ -84,7 +84,7 @@ chmod 0600 /etc/systemd/system/vault.service
 
 systemctl enable vault.service
 
-cd
+popd
 rm -rf /tmp/vault
 
 echo "Vault installation finished."

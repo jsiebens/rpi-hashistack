@@ -3,7 +3,7 @@ set -e
 
 echo "Fetching Nomad... ${NOMAD_VERSION}"
 mkdir /tmp/nomad
-cd /tmp/nomad
+pushd /tmp/nomad
 
 curl -Os https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_arm.zip
 curl -Os https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_SHA256SUMS
@@ -63,7 +63,7 @@ chmod 0600 /etc/systemd/system/nomad.service
 
 systemctl enable nomad.service
 
-cd
+popd
 rm -rf /tmp/nomad
 
 echo "Nomad installation finished."
