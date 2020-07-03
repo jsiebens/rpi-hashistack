@@ -9,4 +9,7 @@ fi
 
 apt-get update
 
-curl https://keybase.io/hashicorp/pgp_keys.asc | gpg --import
+mkdir /tmp/keyring
+chmod 700 /tmp/keyring
+
+curl -s https://keybase.io/hashicorp/pgp_keys.asc | gpg --import --homedir /tmp/keyring

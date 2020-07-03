@@ -10,7 +10,7 @@ curl -Os https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL
 curl -Os https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_SHA256SUMS.sig
 
 # Verify the signature file is untampered.
-gpg --verify consul_${CONSUL_VERSION}_SHA256SUMS.sig consul_${CONSUL_VERSION}_SHA256SUMS
+gpg --homedir /tmp/keyring --verify consul_${CONSUL_VERSION}_SHA256SUMS.sig consul_${CONSUL_VERSION}_SHA256SUMS
 
 # Verify the SHASUM matches the archive.
 shasum -a 256 -c consul_${CONSUL_VERSION}_SHA256SUMS --ignore-missing
