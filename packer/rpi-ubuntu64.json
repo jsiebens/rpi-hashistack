@@ -89,7 +89,7 @@
   "post-processors": [
     {
       "type": "compress",
-      "output": "dist/rpi-{{.BuildName}}-ubuntu64.zip"
+      "output": "dist/rpi-{{.BuildName}}-ubuntu64.xz"
     }
   ]
 }
