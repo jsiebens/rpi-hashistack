@@ -22,7 +22,15 @@
         "NOMAD_VERSION={{user `nomad_version`}}"
       ],
       "scripts": [ "scripts/install-nomad.sh" ],
-      "only": [ "nomad" ]
+      "only": [ "nomad", "nomad-client" ]
+    },
+    {
+      "type": "shell",
+      "environment_vars": [
+        "NOMAD_VERSION={{user `nomad_version`}}"
+      ],
+      "scripts": [ "scripts/install-docker.sh", "scripts/install-jdk.sh" ],
+      "only": [ "nomad-client" ]
     },
     {
       "type": "shell",
