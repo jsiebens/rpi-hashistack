@@ -1,11 +1,33 @@
 #!/bin/bash
 set -e
 
+ARCH=$(uname -m)
+case $ARCH in
+    amd64)
+        SUFFIX=amd64
+        ;;
+    x86_64)
+        SUFFIX=amd64
+        ;;
+    arm64)
+        SUFFIX=arm64
+        ;;
+    aarch64)
+        SUFFIX=arm64
+        ;;
+    arm*)
+        SUFFIX=armhfv6
+        ;;
+    *)
+        echo "Unsupported architecture $ARCH"
+        exit 1
+esac
+
 echo "Fetching Consul... ${CONSUL_VERSION}"
 mkdir -p /tmp/consul
 pushd /tmp/consul
 
-curl -Os https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_armhfv6.zip
+curl -Os https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_${SUFFIX}.zip
 curl -Os https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_SHA256SUMS
 curl -Os https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_SHA256SUMS.sig
 
@@ -16,7 +38,7 @@ gpg --homedir /tmp/keyring --verify consul_${CONSUL_VERSION}_SHA256SUMS.sig cons
 shasum -a 256 -c consul_${CONSUL_VERSION}_SHA256SUMS --ignore-missing
 
 echo "Installing Consul..."
-unzip consul_${CONSUL_VERSION}_linux_armhfv6.zip >/dev/null
+unzip consul_${CONSUL_VERSION}_linux_${SUFFIX}.zip >/dev/null
 mv consul /usr/local/bin/
 
 useradd --system --home /etc/consul.d --shell /bin/false consul
@@ -62,8 +84,6 @@ LimitNOFILE=65536
 WantedBy=multi-user.target
 EOF
 chmod 0600 /etc/systemd/system/consul.service
-
-systemctl enable consul.service
 
 popd
 rm -rf /tmp/consul

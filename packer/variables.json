@@ -1,9 +1,0 @@
-{
-    "consul_version": "1.8.0",
-    "nomad_version": "0.11.3",
-    "vault_version": "1.4.2",
-    
-    "iso_url": "https://github.com/jsiebens/rpi-cloud-init/releases/download/v0.2/rpi-cloud-init.zip",
-    "iso_checksum": "b6c9bb758bbc169286930142a97b01b5a2320803c648a92838c37887f5cfced5",
-    "iso_checksum_type": "sha256"
-}

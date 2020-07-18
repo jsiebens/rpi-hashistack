@@ -1,0 +1,40 @@
+{
+  "variables": {
+    "consul_version": "1.8.0",
+    "nomad_version": "0.11.3",
+    "vault_version": "1.4.3"
+  },
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [ "scripts/dependencies.sh" ]
+    },
+    {
+      "type": "shell",
+      "environment_vars": [
+        "CONSUL_VERSION={{user `consul_version`}}"
+      ],
+      "scripts": [ "scripts/install-consul.sh" ]
+    },
+    {
+      "type": "shell",
+      "environment_vars": [
+        "NOMAD_VERSION={{user `nomad_version`}}"
+      ],
+      "scripts": [ "scripts/install-nomad.sh" ],
+      "only": [ "nomad" ]
+    },
+    {
+      "type": "shell",
+      "environment_vars": [
+        "VAULT_VERSION={{user `vault_version`}}"
+      ],
+      "scripts": [ "scripts/install-vault.sh" ],
+      "only": [ "vault" ]
+    },
+    {
+      "type": "shell",
+      "scripts": [ "scripts/cleanup.sh" ]
+    }
+  ]
+}

@@ -1,11 +1,33 @@
 #!/bin/bash
 set -e
 
+ARCH=$(uname -m)
+case $ARCH in
+    amd64)
+        SUFFIX=amd64
+        ;;
+    x86_64)
+        SUFFIX=amd64
+        ;;
+    arm64)
+        SUFFIX=arm64
+        ;;
+    aarch64)
+        SUFFIX=arm64
+        ;;
+    arm*)
+        SUFFIX=arm
+        ;;
+    *)
+        echo "Unsupported architecture $ARCH"
+        exit 1
+esac
+
 echo "Fetching Nomad... ${NOMAD_VERSION}"
 mkdir /tmp/nomad
 pushd /tmp/nomad
 
-curl -Os https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_arm.zip
+curl -Os https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_${SUFFIX}.zip
 curl -Os https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_SHA256SUMS
 curl -Os https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_SHA256SUMS.sig
 
@@ -16,7 +38,7 @@ gpg --homedir /tmp/keyring --verify nomad_${NOMAD_VERSION}_SHA256SUMS.sig nomad_
 shasum -a 256 -c nomad_${NOMAD_VERSION}_SHA256SUMS --ignore-missing
 
 echo "Installing Nomad..."
-unzip nomad_${NOMAD_VERSION}_linux_arm.zip >/dev/null
+unzip nomad_${NOMAD_VERSION}_linux_${SUFFIX}.zip >/dev/null
 mv nomad /usr/local/bin/
 
 mkdir --parents /opt/nomad
@@ -30,6 +52,9 @@ data_dir  = "/opt/nomad"
 server {
   enabled          = true
   bootstrap_expect = 1
+}
+client {
+  enabled = true
 }
 EOF
 
@@ -60,8 +85,6 @@ TasksMax=infinity
 WantedBy=multi-user.target
 EOF
 chmod 0600 /etc/systemd/system/nomad.service
-
-systemctl enable nomad.service
 
 popd
 rm -rf /tmp/nomad
