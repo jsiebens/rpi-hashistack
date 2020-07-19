@@ -13,6 +13,7 @@ before_install:
 
 script:
   - travis_wait 30 sudo ./build.sh $TARGET
+  - ls -lh dist
 
 before_deploy:
   - cd dist && sudo ../ci/hashgen.sh && cd ..

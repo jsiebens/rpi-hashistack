@@ -61,8 +61,7 @@
           "/run/systemd",
           "/run/systemd"
         ]
-      ],
-      "last_partition_extra_size": 768000000
+      ]
     },
     {
       "name": "vault",
