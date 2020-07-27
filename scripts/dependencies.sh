@@ -2,7 +2,7 @@
 set -e
 
 apt-get -y update 
-apt-get -y install -y curl zip unzip
+apt-get -y install -y curl unzip
 
 mkdir /tmp/keyring
 chmod 700 /tmp/keyring
