@@ -22,15 +22,7 @@
         "NOMAD_VERSION={{user `nomad_version`}}"
       ],
       "scripts": [ "scripts/install-nomad.sh" ],
-      "only": [ "nomad", "nomad-client" ]
-    },
-    {
-      "type": "shell",
-      "environment_vars": [
-        "NOMAD_VERSION={{user `nomad_version`}}"
-      ],
-      "scripts": [ "scripts/install-docker.sh", "scripts/install-jdk.sh" ],
-      "only": [ "nomad-client" ]
+      "only": [ "nomad", "nomad-client", "hashi-stack", "hashi-stack-extra" ]
     },
     {
       "type": "shell",
@@ -38,8 +30,13 @@
         "VAULT_VERSION={{user `vault_version`}}"
       ],
       "scripts": [ "scripts/install-vault.sh" ],
-      "only": [ "vault" ]
+      "only": [ "vault", "hashi-stack" ]
     },
+    {
+      "type": "shell",
+      "scripts": [ "scripts/install-docker.sh", "scripts/install-jdk.sh" ],
+      "only": [ "nomad-client", "hashi-stack-extra" ]
+    },    
     {
       "type": "shell",
       "scripts": [ "scripts/cleanup.sh" ]

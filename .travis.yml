@@ -6,6 +6,8 @@ env:
   - TARGET=nomad
   - TARGET=nomad-client
   - TARGET=vault
+  - TARGET=hashi-stack
+  - TARGET=hashi-stack-extra
 
 before_install:
   - sudo unlink /usr/local/bin/packer
