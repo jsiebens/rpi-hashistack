@@ -58,7 +58,8 @@
           "/run/systemd",
           "/run/systemd"
         ]
-      ]
+      ],
+      "last_partition_extra_size": 256000000
     },
     {
       "name": "vault",
@@ -118,7 +119,8 @@
           "/run/systemd",
           "/run/systemd"
         ]
-      ]
+      ],
+      "last_partition_extra_size": 256000000
     }
   ],
   "post-processors": [
