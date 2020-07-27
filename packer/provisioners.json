@@ -1,8 +1,8 @@
 {
   "variables": {
     "consul_version": "1.8.0",
-    "nomad_version": "0.11.3",
-    "vault_version": "1.4.3"
+    "nomad_version": "0.12.1",
+    "vault_version": "1.5.0"
   },
   "provisioners": [
     {
