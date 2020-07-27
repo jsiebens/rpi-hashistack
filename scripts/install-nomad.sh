@@ -86,6 +86,8 @@ WantedBy=multi-user.target
 EOF
 chmod 0600 /etc/systemd/system/nomad.service
 
+systemctl enable nomad.service
+
 popd
 rm -rf /tmp/nomad
 

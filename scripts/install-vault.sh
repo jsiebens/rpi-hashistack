@@ -104,6 +104,8 @@ WantedBy=multi-user.target
 EOF
 chmod 0600 /etc/systemd/system/vault.service
 
+systemctl enable vault.service
+
 popd
 rm -rf /tmp/vault
 

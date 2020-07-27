@@ -85,6 +85,8 @@ WantedBy=multi-user.target
 EOF
 chmod 0600 /etc/systemd/system/consul.service
 
+systemctl enable consul.service
+
 popd
 rm -rf /tmp/consul
 
