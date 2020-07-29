@@ -132,7 +132,7 @@
   "post-processors": [
     {
       "type": "compress",
-      "output": "dist/rpi-{{.BuildName}}-ubuntu64.xz"
+      "output": "dist/rpi-{{.BuildName}}-ubuntu-arm64.img.xz"
     }
   ]
 }

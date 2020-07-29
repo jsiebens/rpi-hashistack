@@ -2,18 +2,18 @@ language: minimal
 dist: focal
 
 env:
-  - BASE=ubuntu32 TARGET=consul
-  - BASE=ubuntu32 TARGET=nomad
-  - BASE=ubuntu32 TARGET=nomad-client
-  - BASE=ubuntu32 TARGET=vault
-  - BASE=ubuntu32 TARGET=hashi-stack
-  - BASE=ubuntu32 TARGET=hashi-stack-extra
-  - BASE=ubuntu64 TARGET=consul
-  - BASE=ubuntu64 TARGET=nomad
-  - BASE=ubuntu64 TARGET=nomad-client
-  - BASE=ubuntu64 TARGET=vault
-  - BASE=ubuntu64 TARGET=hashi-stack
-  - BASE=ubuntu64 TARGET=hashi-stack-extra
+  - BASE=ubuntu-armhf TARGET=consul
+  - BASE=ubuntu-armhf TARGET=nomad
+  - BASE=ubuntu-armhf TARGET=nomad-client
+  - BASE=ubuntu-armhf TARGET=vault
+  - BASE=ubuntu-armhf TARGET=hashi-stack
+  - BASE=ubuntu-armhf TARGET=hashi-stack-extra
+  - BASE=ubuntu-arm64 TARGET=consul
+  - BASE=ubuntu-arm64 TARGET=nomad
+  - BASE=ubuntu-arm64 TARGET=nomad-client
+  - BASE=ubuntu-arm64 TARGET=vault
+  - BASE=ubuntu-arm64 TARGET=hashi-stack
+  - BASE=ubuntu-arm64 TARGET=hashi-stack-extra
 
 before_install:
   - sudo unlink /usr/local/bin/packer

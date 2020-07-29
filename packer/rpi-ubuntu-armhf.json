@@ -126,7 +126,7 @@
   "post-processors": [
     {
       "type": "compress",
-      "output": "dist/rpi-{{.BuildName}}-ubuntu32.xz"
+      "output": "dist/rpi-{{.BuildName}}-ubuntu-armhf.img.xz"
     }
   ]
 }
